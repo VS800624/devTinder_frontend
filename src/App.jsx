@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import Body from "./components/Body";
 import Login from "./components/Login";
+import Profile from "./components/Profile";
 
 // const router = createBrowserRouter([
 //   {
@@ -29,6 +30,7 @@ function App() {
         {/* <Route path="/" element={<Body/>}/>  or */}
         <Route path="/" element={<Body/>}>
             <Route path="/login" element={<Login/>}/>
+            <Route path="/profile" element={<Profile/>}/>
         </Route> 
       </Routes>
     </BrowserRouter>
