@@ -8,6 +8,11 @@
  - Install react router dom
  - Create BrowserRouter > Routes > Route=/ element = Body > RouteChildren
  - Create an Outlet in your Body Component
+ - Create a Footer
+ - Create a Login Page
+ - Install axios
+ - CORS - install cors in backend => add middleware to with configurations: origin, credentials: true
+ - Whenever you are making API call so pass axios => { withCredentials: true}
 
 
  Body 
