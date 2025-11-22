@@ -9,6 +9,7 @@ import Login from "./components/Login";
 import Profile from "./components/Profile";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
+import Feed from "./components/Feed";
 
 // const router = createBrowserRouter([
 //   {
@@ -31,8 +32,9 @@ function App() {
       <Routes>
         {/* <Route path="/" element={<Body/>}/>  or */}
         <Route path="/" element={<Body/>}>
-            <Route path="/login" element={<Login/>}/>
-            <Route path="/profile" element={<Profile/>}/>
+          <Route path="/" element={<Feed/>}/>
+          <Route path="/login" element={<Login/>}/>
+          <Route path="/profile" element={<Profile/>}/>
         </Route> 
       </Routes>
     </BrowserRouter>
