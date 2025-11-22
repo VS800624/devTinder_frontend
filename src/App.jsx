@@ -7,6 +7,8 @@ import {
 import Body from "./components/Body";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
 
 // const router = createBrowserRouter([
 //   {
@@ -24,7 +26,7 @@ function App() {
   return (
     <>
     {/* <RouterProvider router={router} />; */}
-
+  <Provider store={appStore}>
     <BrowserRouter basename="/">
       <Routes>
         {/* <Route path="/" element={<Body/>}/>  or */}
@@ -34,6 +36,7 @@ function App() {
         </Route> 
       </Routes>
     </BrowserRouter>
+  </Provider>
 
     </>
   );
