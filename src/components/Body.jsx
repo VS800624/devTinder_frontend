@@ -15,14 +15,14 @@ const Body = () => {
   
   const fetchUser = async () => {
     try {
-      if(userData) return
+       if (userData?._id) return;
       const res = await axios.get(BASE_URL + "/profile/view", {
       withCredentials: true,
     });
     // console.log(res.data)
     dispatch(addUser(res.data))
     } catch (err){
-      if(err.status === 401){
+      if(err?.status === 401){
         navigate("/login")
       }
       console.error(err)
@@ -30,10 +30,10 @@ const Body = () => {
   };
 
   useEffect(() => {
-    if(!userData){
+    if(!userData?._id){
       fetchUser()
     }
-  })
+  },[])
 
   return (
     <>
