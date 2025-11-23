@@ -9,7 +9,7 @@ const appStore = configureStore({
   }
 })
 
-export default appStore
+export default appStore 
 
 // Note this reducer is a big reducer which contain small reducers like userReducer
 
