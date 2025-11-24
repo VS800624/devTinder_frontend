@@ -7,8 +7,8 @@ import { BASE_URL } from "../utils/constants";
 
 const Login = () => {
 
-  const [emailId , setEmailId] = useState("john@123.com")
-  const [password, setPassword] = useState("John@619")
+  const [emailId , setEmailId] = useState("")
+  const [password, setPassword] = useState("")
   const [error, setError] = useState("")
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -23,7 +23,7 @@ const Login = () => {
     dispatch(addUser(res.data.user))
     navigate("/")
     } catch(err){
-      setError(err?.response?.data || "Something went wrong")
+      setError(err?.response?.data?.message || "Something went wrong")
       console.log(err)
     }
   }
