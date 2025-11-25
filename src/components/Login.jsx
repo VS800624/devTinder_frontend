@@ -23,7 +23,7 @@ const Login = () => {
     dispatch(addUser(res.data.user))
     navigate("/")
     } catch(err){
-      setError(err?.response?.data?.message || "Something went wrong")
+      setError(err?.response?.data || "Something went wrong")
       console.log(err)
     }
   }
