@@ -25,7 +25,8 @@
  - build the user card on feed
  - Edit profile feature
  - Show Toast Message on save of profile
- - See my all connections
+ - New page See my all connections
+ - New page See my all connection request
 
 
  Body 
