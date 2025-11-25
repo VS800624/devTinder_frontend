@@ -24,6 +24,10 @@ const Feed = () => {
   useEffect(() => {
     getFeed()
   }, [])
+
+   if (feed.length === 0) {
+    return <p className='flex justify-center my-10 text-xl font-semibold'>Their is no feed</p>
+  }
   
   return (
     feed && (
