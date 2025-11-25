@@ -25,6 +25,8 @@ const Feed = () => {
     getFeed()
   }, [])
 
+  if(!feed) return
+  
    if (feed.length === 0) {
     return <p className='flex justify-center my-10 text-xl font-semibold'>Their is no feed</p>
   }
