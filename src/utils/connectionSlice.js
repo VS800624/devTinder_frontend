@@ -8,7 +8,7 @@ const connectionSlice = createSlice({
     addConnections : (state, action) => {
       return action.payload
     }, 
-    removeConnections : (state, actions) => {
+    removeConnections : (state, action) => {
       return null
     }
   }

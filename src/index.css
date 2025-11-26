@@ -2,7 +2,7 @@
 @plugin "daisyui" 
 
 /* Put your custom classes inside @layer components */
-@layer components {
+/* @layer components {
 
   .btn-accept {
     @apply px-5 py-2 rounded-md font-medium text-white 
@@ -32,4 +32,4 @@
     shadow-md hover:shadow-lg transition-all duration-300;
   }
 
-}
+} */
