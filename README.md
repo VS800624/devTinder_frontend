@@ -28,6 +28,9 @@
  - New page - See my all connections
  - New page - See my all connection request
  - Feature - Accept/Reject connection request
+ - Feature - Interested/Ignore connection request
+ - SignUp New User
+ - Testing
 
 
  Body 

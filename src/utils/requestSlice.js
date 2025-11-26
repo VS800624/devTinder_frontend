@@ -7,7 +7,8 @@ const requestSlice = createSlice({
   reducers: {
     addRequests : (state, action) => action.payload,
     removeRequest : (state, action) => {
-      const newArray = state.filter((req) =>  req._id !== action.payload) //it will remove the person which request user have accepted or rejected on the bases od _id
+      const newArray = state.filter((req) =>  req._id !== action.payload) // the value of user connections is inside the state 
+      // it will remove the person which request user have accepted or rejected on the bases od _id
       return newArray
     }
   }
