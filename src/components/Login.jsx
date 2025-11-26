@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 
 const Login = () => {
@@ -10,6 +10,7 @@ const Login = () => {
   const [emailId , setEmailId] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
+  const [showPassword, setShowPassword] = useState(false)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -39,7 +40,7 @@ const Login = () => {
                 <span className="label-text mb-1">Email ID</span>
               </label>
               <input
-                type="text"
+                type="email"
                 value= {emailId}
                 placeholder="Enter your email"
                 className="input input-bordered w-full"
@@ -50,19 +51,23 @@ const Login = () => {
               <label className="label ">
                 <span className="label-text mb-1">Password</span>
               </label>
-              <input
-                type="text"
+               <input
+                type={showPassword? "text" : "password"}
                 value={password}
                 placeholder="Enter your password"
                 className="input input-bordered w-full"
                 onChange={(e) => setPassword(e.target.value)}
               />
+              <button type="button" className="text-sm text-blue-600 my-2" onClick={() => setShowPassword(!showPassword)}>
+                {showPassword ? "Hide Password" : "Show Password"}
+              </button>
             </div>
             <p className="text-red-500 my-[10px]">{error}</p>
           </div>
           <div className="card-actions justify-center">
             <button className="btn btn-primary " onClick={handleLogin}>Login</button>
           </div>
+            <Link to="/signup" className="text-center m-2 text-red-600">Don't have a account? Signup</Link>
         </div>
       </div>
     </div>
