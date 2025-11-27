@@ -109,7 +109,7 @@ const EditProfile = ({ user }) => {
                   <select
                     name="gender"
                     id="gender"
-                    value={gender}
+                    value={gender[0].toUpperCase() + gender.slice(1)}
                     className="select select-bordered mt-1 w-full max-w-xs "
                     onChange={(e) => setGender(e.target.value)}
                   >

@@ -41,7 +41,7 @@ const Connections = () => {
             </div>
             <div className="text-left mx-4">
               <h2 className="text-xl font-semibold">{firstName + " " + lastName}</h2>
-              {age && gender && <p>{age + ", " + gender}</p>}
+              {age && gender && <p>{age + ", " + gender[0].toUpperCase() + gender.slice(1)}</p>}
               { skills && <p>{"Skills: " + skills}</p>}
               <p>About: {about}</p>
             </div>

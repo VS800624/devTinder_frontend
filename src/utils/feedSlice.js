@@ -11,8 +11,9 @@ const feedSlice = createSlice({
       const newFeed = state.filter((user) => user._id !== action.payload); //remove the people in the feed which the user had sended the ignored/interested connection request
       return newFeed;
     },
+    removeAllFeed: () => null
   },
 });
 
-export const { addFeed, removeUserFromFeed } = feedSlice.actions;
+export const { addFeed, removeUserFromFeed, removeAllFeed } = feedSlice.actions;
 export default feedSlice.reducer;
