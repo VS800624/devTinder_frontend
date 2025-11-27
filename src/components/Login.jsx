@@ -10,17 +10,43 @@ const Login = () => {
   const [emailId , setEmailId] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
+  const [firstName , setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
   const [showPassword, setShowPassword] = useState(false)
+  const [isLoginForm, setIsLoginForm] = useState(true)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
+  const handleSignup = async () => {
+     if (!firstName || !lastName || !emailId || !password) {
+    return setError("All fields are required");
+  }
+    try {
+      const res = await axios.post(
+        BASE_URL + "/signup",
+        {
+          firstName,
+          lastName,
+          emailId,
+          password,
+        },
+        { withCredentials: true }
+      );
+      dispatch(addUser(res.data.data))
+      navigate("/profile")
+    } catch (err) {
+      setError(err?.response?.data || "Something went wrong")
+      console.log(err)
+    }
+  };
+  
   const handleLogin = async () => {
     try {
       const res = await axios.post(BASE_URL + "/login",{
       emailId,
       password
     }, {withCredentials: true})
-    // console.log(res.data)
+    console.log(res.data)
     dispatch(addUser(res.data.user))
     navigate("/")
     } catch(err){
@@ -33,8 +59,38 @@ const Login = () => {
     <div className="flex my-10 justify-center">
       <div className="card bg-base-300 w-96 shadow-sm ">
         <div className="card-body">
-          <h2 className="card-title  justify-center">Login!</h2>
+          <h2 className="card-title  justify-center">{isLoginForm ? "Login!" : "Signup!"}</h2>
           <div className="form-control w-full max-w-xs py-4">
+            {
+            !isLoginForm && (
+                <>
+                <div className="mb-4">
+                <label className="label ">
+                  <span className="label-text mb-1">First Name</span>
+                </label>
+                <input
+                  type="text"
+                  value={firstName}
+                  placeholder="Enter your first name"
+                  className="input input-bordered w-full"
+                  onChange={(e) => setFirstName(e.target.value)}
+                />
+              </div>
+              <div className="mb-4">
+                <label className="label ">
+                  <span className="label-text mb-1">Last Name</span>
+                </label>
+                <input
+                  type="text"
+                  value={lastName}
+                  placeholder="Enter your last name"
+                  className="input input-bordered w-full"
+                  onChange={(e) => setLastName(e.target.value)}
+                />
+              </div>
+                </>
+              ) 
+            }
             <div className="mb-4">
               <label className="label ">
                 <span className="label-text mb-1">Email ID</span>
@@ -65,9 +121,9 @@ const Login = () => {
             <p className="text-red-500 my-[10px]">{error}</p>
           </div>
           <div className="card-actions justify-center">
-            <button className="btn btn-primary " onClick={handleLogin}>Login</button>
+            <button className="btn btn-primary " onClick={isLoginForm ? handleLogin : handleSignup}>{isLoginForm ? "Login": "SignUp"}</button>
           </div>
-            <Link to="/signup" className="text-center m-2 text-red-600">Don't have a account? Signup</Link>
+            <p className="mx-auto cursor-pointer py-2 text-red-600" onClick={() => setIsLoginForm(!isLoginForm)}>{isLoginForm ? "Don't have a account? Signup!" : "Already have a account? Login!"}</p>
         </div>
       </div>
     </div>

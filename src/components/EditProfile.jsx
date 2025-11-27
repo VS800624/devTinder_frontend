@@ -10,13 +10,13 @@ const EditProfile = ({ user }) => {
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
   const [photoUrl, setPhotoUrl] = useState(user.photoUrl);
-  const [gender, setGender] = useState(user.gender);
-  const [age, setAge] = useState(user.age);
-  const [about, setAbout] = useState(user.about);
-  const [skills, setSkills] = useState(user.skills);
+  const [gender, setGender] = useState(user.gender || "");
+  const [age, setAge] = useState(user.age || "");
+  const [about, setAbout] = useState(user.about || "");
+  const [skills, setSkills] = useState(user.skills || "");
   const [error, setError] = useState("");
   const [showToast, setShowToast] = useState(false)
-  const dispatch = useDispatch;
+  const dispatch = useDispatch();
 
   const saveProfile = async () => {
     // Clear Errors
@@ -140,6 +140,7 @@ const EditProfile = ({ user }) => {
                     className="textarea textarea-bordered w-full"
                     id="w3review"
                     name="w3review"
+                    value={about}
                     rows="4"
                     cols="50"
                     onChange={(e) => setAbout(e.target.value)}

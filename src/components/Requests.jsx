@@ -66,7 +66,7 @@ const Requests = () => {
               </h2>
               {age && gender && <p>{age + ", " + gender}</p>}
               {skills && <p>{"Skills: " + skills}</p>}
-              <p>About: {about}</p>
+              {/* <p>About: {about}</p> */}
               <div className="card-actions justify-center gap-[10px] my-4">
                 <button className="btn btn-success" onClick={() => reviewRequests("accepted", request._id)}>Accept</button>
                 <button className="btn btn-error" onClick={() => reviewRequests("rejected", request._id)}>Reject</button>
