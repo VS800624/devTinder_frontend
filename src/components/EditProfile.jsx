@@ -10,7 +10,7 @@ const EditProfile = ({ user }) => {
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
   const [photoUrl, setPhotoUrl] = useState(user.photoUrl);
-  const [gender, setGender] = useState(user.gender || "");
+  const [gender, setGender] = useState(user.gender || "male");
   const [age, setAge] = useState(user.age || "");
   const [about, setAbout] = useState(user.about || "");
   const [skills, setSkills] = useState(user.skills || "");
