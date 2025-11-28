@@ -55,7 +55,7 @@ const Requests = () => {
         return (
           <div
             key={_id}
-            className="flex mx-auto m-4 p-4 bg-base-300 rounded-lg w-1/2"
+            className="flex mx-8 md:mx-auto m-4 p-4 bg-base-300 rounded-lg  md:w-1/2"
           >
             <div>
               <img src={photoUrl} className="w-24 rounded-full" alt={firstName + " profile photo"} />
