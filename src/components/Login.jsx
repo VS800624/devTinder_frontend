@@ -47,7 +47,7 @@ const Login = () => {
       emailId,
       password
     }, {withCredentials: true})
-    console.log(res.data)
+    // console.log(res.data)
     dispatch(addUser(res.data.user))
     navigate("/")
     } catch(err){

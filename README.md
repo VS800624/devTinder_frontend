@@ -39,3 +39,47 @@
     Route=/login => Login Page
     Route=/connection => Connection Page
     Route=/profile => Profile
+
+   # Deployment
+   - Signup om AWS
+   - Launch instance 
+   - chmod 400  <secret>.pem
+   - ssh -i "devTinder-secret.pem" ubuntu@ec2-13-60-28-192.eu-north-1.compute.amazonaws.com
+   - Install node version same as your system
+   - Git clone
+   - Frontend
+      - npm install -> dependencies install
+      - npm run build
+      - sudo apt update
+      - sudo apt install nginx
+      - sudo systemctl start nginx
+      - sudo systemctl enable nginx
+      - copy code from dist(build files) to /var/www/html/
+      - sudo scp -r dist/* /var/www/html/
+      - Enable port :80 of your instance
+      - allowed ec2 instance public IP on mongodb server
+      - npm install pm2 -g
+      - pm2 start npm -- start
+      - pm2 logs
+      - pm2 list , pm2 flush <name>, pm2 delete <name>
+      - pm2 start npm --name "devTinder-backend" -- start (for giving custom name)
+      - config nginx - /etc/nginx/sites/-available/default
+      - restart nginx: sudo systemctl daemon-reload and sudo systemctl restart nginx
+      - Modify the BASE_URL in frontend project to "/api
+
+
+
+      Frontend - http://13.60.28.192/
+      Backend - http://13.60.28.192:3000 
+
+      # nginx config: 
+          server_name 13.60.28.192;
+
+        location /api/ {
+            proxy_pass http://localhost:3000/;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection 'upgrade';
+            proxy_set_header Host $host;
+            proxy_cache_bypass $http_upgrade;
+         }

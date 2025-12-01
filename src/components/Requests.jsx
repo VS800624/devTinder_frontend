@@ -27,7 +27,7 @@ const Requests = () => {
       console.error(err);
     }
   };
-  console.log(requests);
+  // console.log(requests);
   useEffect(() => {
     fetchRequests();
   }, []);
