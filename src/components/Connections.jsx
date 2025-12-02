@@ -29,21 +29,21 @@ const Connections = () => {
   }
 
   return (
-    <div className="text-center mt-10 mb-20">
-      <h1 className="font-bold text-3xl">Connections</h1>
+    <div className="text-center mt-10 mb-[140px]">
+      <h1 className="font-bold text-3xl my-10">Connections</h1>
       {connections.map((connection) => {
         const { firstName, lastName, age, photoUrl, about, gender, skills, _id } =
           connection;
         return (
-          <div key={_id} className="flex mx-8 md:mx-auto m-4 p-4 bg-base-300 rounded-lg  md:w-1/2">
-            <div className="w-24 h-24 rounded-full overflow-hidden">
+          <div key={_id} className="flex flex-col items-center md:items-start m-4  md:flex-row md:mx-auto   p-4 bg-base-300 rounded-lg  md:w-1/2">
+            <div className="w-24 h-24 rounded-full overflow-hidden  flex-shrink-0 mb-4">
               <img src={photoUrl} className="w-full h-full object-cover" alt="" />
             </div>
-            <div className="text-left mx-4">
+            <div className="text-center md:text-left mx-4">
               <h2 className="text-xl font-semibold">{firstName + " " + lastName}</h2>
               {age && gender && <p>{age + ", " + gender[0].toUpperCase() + gender.slice(1)}</p>}
-              { skills && <p>{"Skills: " + skills}</p>}
-              <p>About: {about}</p>
+              { skills && <p><span className="font-semibold">Skills: </span>  {skills}</p>}
+              <p><span className="font-semibold">About: </span> {about}</p>
             </div>
           </div>
         );
@@ -53,3 +53,13 @@ const Connections = () => {
 };
 
 export default Connections;
+
+
+
+// note
+// Reason: The outer container is not a perfect square
+// Even though you wrote w-24 h-24, Tailwind in some layouts (flex, custom styles, DaisyUI themes) sometimes overrides these values due to:
+// Parent flexbox constraints
+// DaisyUI card/avatar default styling
+// Missing flex-shrink-0
+// So the image container gets squeezed and becomes a rectangle → the rounded-full looks oval → image looks weird.

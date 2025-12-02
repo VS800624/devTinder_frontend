@@ -39,8 +39,8 @@ const Requests = () => {
   }
 
   return (
-    <div className="text-center mt-10 mb-20">
-      <h1 className="font-bold text-3xl">Connection Requests</h1>
+    <div className="text-center mt-10 mb-[140px]">
+      <h1 className="font-bold text-3xl my-10">Connection Requests</h1>
       {requests.map((request) => {
         const {
           firstName,
@@ -55,19 +55,20 @@ const Requests = () => {
         return (
           <div
             key={_id}
-            className="flex mx-8 md:mx-auto m-4 p-4 bg-base-300 rounded-lg  md:w-1/2"
+            className="flex flex-col items-center md:items-start m-4  md:flex-row md:mx-auto   p-4 bg-base-300 rounded-lg  md:w-1/2"
           >
-            <div>
-              <img src={photoUrl} className="w-24 rounded-full" alt={firstName + " profile photo"} />
+            <div className="w-24 h-24 rounded-full overflow-hidden flex-shrink-0 mb-4">
+              <img src={photoUrl} className="w-full h-full object-cover " alt={firstName + " profile photo"} />
             </div>
-            <div className="text-left mx-4">
+            <div className="text-center md:text-left md:mx-4">
               <h2 className="text-xl font-semibold">
                 {firstName + " " + lastName}
               </h2>
               {age && gender && <p>{age + ", " + gender}</p>}
-              {skills && <p>{"Skills: " + skills}</p>}
-              {/* <p>About: {about}</p> */}
-              <div className="card-actions justify-center gap-[10px] my-4">
+             { skills && <p><span className="font-semibold">Skills: </span>  {skills}</p>}
+              <p><span className="font-semibold">About: </span> {about}</p>
+              <div className="flex flex-col sm:flex-row justify-center md:justify-start 
+                    gap-3 mt-4">
                 <button className="btn btn-success" onClick={() => reviewRequests("accepted", request._id)}>Accept</button>
                 <button className="btn btn-error" onClick={() => reviewRequests("rejected", request._id)}>Reject</button>
               </div>

@@ -32,11 +32,11 @@ const Navbar = () => {
       <div className="flex gap-2">
         {/* <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" /> */}
         {user && <div className="dropdown dropdown-end">
-          Welcome, {user.firstName}
+          Welcome, {user.firstName} 
           <div
             tabIndex={0}
             role="button"
-            className="btn btn-ghost btn-circle avatar md:mx-5"
+            className="btn btn-ghost btn-circle avatar mx-2 md:mx-5"
           >
             <div className="w-10 rounded-full ">
               <img
