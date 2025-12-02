@@ -36,12 +36,13 @@ const Login = () => {
       dispatch(addUser(res.data.data))
       navigate("/profile")
     } catch (err) {
-      setError(err?.response?.data || "Something went wrong")
+      setError(err?.response?.data?.message || "Something went wrong")
       console.log(err)
     }
   };
   
   const handleLogin = async () => {
+    if(!emailId || !password) return setError("All fields are required")
     try {
       const res = await axios.post(BASE_URL + "/login",{
       emailId,
@@ -51,13 +52,13 @@ const Login = () => {
     dispatch(addUser(res.data.user))
     navigate("/")
     } catch(err){
-      setError(err?.response?.data || "Something went wrong")
+      setError(err?.response?.data?.message || "Something went wrong")
       console.log(err)
     }
   }
   
   return (
-    <div className="flex my-10 justify-center">
+    <div className="flex md:my-10 mt-10 mb-[100px] justify-center">
       <div className="card bg-base-300 w-96 shadow-sm ">
         <div className="card-body">
           <h2 className="card-title  justify-center">{isLoginForm ? "Login!" : "Signup!"}</h2>

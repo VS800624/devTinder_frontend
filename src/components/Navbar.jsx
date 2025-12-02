@@ -16,8 +16,8 @@ const Navbar = () => {
   const handleLogout = async() => {
     try{
       await axios.post(BASE_URL + "/logout", {} , {withCredentials: true})
-      dispatch(removeUser(user))
-      dispatch(removeAllFeed())
+     dispatch(removeUser());       // CLEAR USER
+     dispatch(removeAllFeed());    // CLEAR FEED
       return navigate("/login")
     } catch (err){
       console.error(err)
@@ -36,7 +36,7 @@ const Navbar = () => {
           <div
             tabIndex={0}
             role="button"
-            className="btn btn-ghost btn-circle avatar mx-5"
+            className="btn btn-ghost btn-circle avatar md:mx-5"
           >
             <div className="w-10 rounded-full ">
               <img

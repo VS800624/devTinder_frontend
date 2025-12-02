@@ -8,7 +8,7 @@ import UserCard from './UserCard'
 const Feed = () => {
 
   const feed = useSelector((store) => store.feed)
-  // console.log(feed)
+  console.log(feed)
   const dispatch = useDispatch()
 
   const getFeed = async () => {
@@ -25,9 +25,9 @@ const Feed = () => {
     getFeed()
   }, [])
 
-  if(!feed) return
+  if(!feed) return null
   
-   if (feed.length === 0) {
+   if (!feed || feed.length === 0) {
     return <p className='flex justify-center my-10 text-xl font-semibold'>No new user found!</p>
   }
   
