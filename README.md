@@ -69,6 +69,7 @@
 
 
 
+
       Frontend - http://13.60.28.192/
       Backend - http://13.60.28.192:3000 
 
@@ -83,3 +84,26 @@
             proxy_set_header Host $host;
             proxy_cache_bypass $http_upgrade;
          }
+
+   # Adding a custom domain name
+      - purchased domain name from godaddy
+      - signup on cloudflare & add a new domain name
+      - change the nameservers on godaddy and point it to cloudflare 
+      - wait for sometime till your nameservers are updated
+      - DNS record: A devtinder.in http://13.60.28.192/
+      - Enable SSL for website
+
+   # Sending Emails via SES
+      - Create a IAM user  
+      - Give access to AmazonSESFullAccess
+      - Amazon SES: Create an Identity 
+      - Verify your domain name 
+      - Verify an email address identity 
+      - Install AWS SDK - v3
+      - Code Example : https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascript/example_code/ses/ses_sendemail.js 
+      - Setup SesClient 
+      - Access Credentials should be created in IAM under SecurityCredentials Tab
+      - Add the credentials to the env file 
+      - Write code for SESClient 
+      - Write code for sending email address 
+      - Make the email dynamic by  passing more params to the run function 
