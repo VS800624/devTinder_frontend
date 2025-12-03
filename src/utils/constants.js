@@ -3,4 +3,6 @@
 // export const BASE_URL = "http://13.60.28.192/api" 
 
 // localhost (development)
-export const BASE_URL = "http://localhost:3000"
+// export const BASE_URL = "http://localhost:3000"  
+
+export const BASE_URL = location.hostname === "localhost" ? "http://localhost:3000" : "/api"
