@@ -13,6 +13,7 @@ import Feed from "./components/Feed";
 import Connections from "./components/Connections";
 import Requests from "./components/Requests";
 import ChangePassword from "./components/ChangePassword";
+import Premium from "./components/Premium";
 // import SignUp from "./components/SignUp";
 
 // const router = createBrowserRouter([
@@ -43,6 +44,8 @@ function App() {
           <Route path="/connections" element={<Connections/>}/>
           <Route path="/requests" element={<Requests/>}/>
           <Route path="/change-password" element={<ChangePassword/>}/>
+          <Route path="/premium" element={<Premium/>}/>
+          {/* <Route path="/terms-and-conditions" element={<terms/>}/> */}
         </Route> 
       </Routes>
     </BrowserRouter>

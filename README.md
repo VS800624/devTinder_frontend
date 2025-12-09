@@ -107,3 +107,6 @@
       - Write code for SESClient 
       - Write code for sending email address 
       - Make the email dynamic by  passing more params to the run function 
+
+   # Razorpay Payment Gateway Integration
+      - Sign up on Razorpay & complete KYC
