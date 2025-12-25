@@ -110,3 +110,11 @@
 
    # Razorpay Payment Gateway Integration
       - Sign up on Razorpay & complete KYC
+      - Created a UI for premium page
+      - Created an API for create order in backend
+      - Added my key and secret in env file
+      - Initialized razorpay in utils
+      - creating order on razorpay 
+      - create Schema and model
+      - saved the order in payments collection
+      - make the API dynamic 

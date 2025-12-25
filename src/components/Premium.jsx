@@ -1,11 +1,63 @@
+import axios from "axios";
+import { BASE_URL } from "../utils/constants";
+
 const Premium = () => {
+  const handleBuyClick = async (type) => {
+    const order = await axios.post(
+      BASE_URL + "/payment/create",
+      {
+        membershipType: type,
+      },
+      { withCredentials: true }
+    );
+
+    // It should open the razorpay dialog box
+
+    const {amount, keyId, currency, notes, orderId} = order.data
+
+    const options = {
+      key: keyId, // Razorpay Key ID (TEST or LIVE)
+      amount, 
+      currency,
+      name: "Dev Tinder", 
+      description: "Connect to other developers",
+      order_id: orderId,
+      image: "https://your-logo-url.png",
+
+    //   handler: function (response) {
+    //     console.log(response);
+    //     /*
+    //   response.razorpay_payment_id
+    //   response.razorpay_order_id
+    //   response.razorpay_signature
+    // */
+    //   },
+
+      prefill: {
+        name: notes.firstName + " " + notes.lastName,
+        email: notes.emailId,
+        // contact: "9999999999",
+      },
+
+      // notes: {
+      //   address: "India",
+      // },
+
+      theme: {
+        color: "#3399cc",
+      },
+    };
+
+    //This line will oen up the razorpay dialog box , this is very important
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+  };
+
   return (
-    <div className="min-h-screen bg-gray-100 px-4 py-12">
+    <div className="min-h-screen bg-gray-100 px-4 py-12 mb-[120px] md:mb-4">
       {/* Header */}
       <div className="text-center mb-10">
-        <h1 className="text-3xl font-bold text-gray-900">
-          Premium Membership
-        </h1>
+        <h1 className="text-3xl font-bold text-gray-900">Premium Membership</h1>
         <p className="text-gray-600 mt-2 text-sm">
           Upgrade your experience with our premium plans
         </p>
@@ -20,13 +72,9 @@ const Premium = () => {
           </h2>
           <p className="text-3xl font-bold text-gray-900 mb-1">
             ₹99
-            <span className="text-sm font-medium text-gray-500">
-              /month
-            </span>
+            <span className="text-sm font-medium text-gray-500">/month</span>
           </p>
-          <p className="text-gray-600 text-sm mb-6">
-            Best for beginners
-          </p>
+          <p className="text-gray-600 text-sm mb-6">Best for beginners</p>
 
           <ul className="space-y-3 text-sm text-gray-700 mb-8">
             <li>✔ Access to chat with other people</li>
@@ -36,7 +84,10 @@ const Premium = () => {
             <li>✔ Blue Tick</li>
           </ul>
 
-          <button className="w-full py-2 rounded-full bg-gray-900 text-white font-semibold hover:bg-gray-700 transition">
+          <button
+            className="w-full py-2 rounded-full bg-gray-900 text-white font-semibold hover:bg-gray-700 transition"
+            onClick={() => handleBuyClick("silver")}
+          >
             Choose Silver
           </button>
         </div>
@@ -52,23 +103,22 @@ const Premium = () => {
           </h2>
           <p className="text-3xl font-bold text-gray-900 mb-1">
             ₹199
-            <span className="text-sm font-medium text-gray-500">
-              /month
-            </span>
+            <span className="text-sm font-medium text-gray-500">/month</span>
           </p>
-          <p className="text-gray-600 text-sm mb-6">
-            Best for professionals
-          </p>
+          <p className="text-gray-600 text-sm mb-6">Best for professionals</p>
 
           <ul className="space-y-3 text-sm text-gray-700 mb-8">
             <li>✔ All Silver features included</li>
             <li>✔ Infinite connection requests per day</li>
             <li>✔ Priority support</li>
             {/* <li>✔ Unlimited access</li> */}
-            <li >✔ Premium exclusive content</li>
+            <li>✔ Premium exclusive content</li>
           </ul>
 
-          <button className="w-full py-2 rounded-full bg-yellow-400 text-black font-semibold hover:bg-yellow-300 transition">
+          <button
+            className="w-full py-2 rounded-full bg-yellow-400 text-black font-semibold hover:bg-yellow-300 transition"
+            onClick={() => handleBuyClick("gold")}
+          >
             Choose Gold
           </button>
         </div>

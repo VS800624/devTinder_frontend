@@ -37,7 +37,7 @@ const Login = () => {
       navigate("/profile")
     } catch (err) {
       setError(err?.response?.data?.message || "Something went wrong")
-      console.log(err)
+      // console.log(err)
     }
   };
   
@@ -53,7 +53,7 @@ const Login = () => {
     navigate("/")
     } catch(err){
       setError(err?.response?.data?.message || "Something went wrong")
-      console.log(err)
+      // console.log(err)
     }
   }
   
