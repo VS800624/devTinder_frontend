@@ -14,6 +14,7 @@ import Connections from "./components/Connections";
 import Requests from "./components/Requests";
 import ChangePassword from "./components/ChangePassword";
 import Premium from "./components/Premium";
+import NotFound from "./components/NotFound";
 // import SignUp from "./components/SignUp";
 
 // const router = createBrowserRouter([
@@ -47,6 +48,8 @@ function App() {
           <Route path="/premium" element={<Premium/>}/>
           {/* <Route path="/terms-and-conditions" element={<terms/>}/> */}
         </Route> 
+         {/* Unknown URL */}
+            <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   </Provider>
