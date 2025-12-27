@@ -1,9 +1,13 @@
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Premium = () => {
   const [isUserPremium, setIsUserPremium] = useState(false);
+
+  useEffect(() => {
+    verifyPremiumUser();
+  }, []);
 
   const verifyPremiumUser = async () => {
     const res = await axios.get(BASE_URL + "/premium/verify", {
@@ -60,7 +64,19 @@ const Premium = () => {
   };
 
   return isUserPremium ? (
-    <div>You are already a premium user</div>
+    <div className="max-w-md mx-auto mt-10 rounded-2xl border border-yellow-300 bg-yellow-50 p-6 text-center shadow-sm">
+      <div className="flex justify-center mb-4">
+        <div className="h-12 w-12 flex items-center justify-center rounded-full bg-yellow-400 text-white text-xl font-bold">
+          ★
+        </div>
+      </div>
+
+      <h2 className="text-xl font-semibold text-gray-800">Premium Active</h2>
+
+      <p className="mt-2 text-gray-600">
+        You are already a premium user. Enjoy all exclusive features.
+      </p>
+    </div>
   ) : (
     <div className="min-h-screen bg-gray-100 px-4 py-12 mb-[120px] md:mb-4">
       {/* Header */}
