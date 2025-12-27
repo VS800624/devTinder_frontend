@@ -118,3 +118,8 @@
       - create Schema and model
       - saved the order in payments collection
       - make the API dynamic 
+      - Setup Razorpay webhook on your live API
+      - Ref: https://github.com/razorpay/razorpay-node/tree/master/documents
+      - Ref: https://github.com/docs/payments/server-integration/node-js/integration-steps/#integrate-with-razorpay-payment-gateway
+      - Ref:  https://github.com/docs/webhooks/validate-test/
+      - Ref:  https://razorpay.com/docs/webhooks/payloads/payments/
