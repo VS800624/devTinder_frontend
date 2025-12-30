@@ -15,6 +15,7 @@ import Requests from "./components/Requests";
 import ChangePassword from "./components/ChangePassword";
 import Premium from "./components/Premium";
 import NotFound from "./components/NotFound";
+import Chat from "./components/Chat";
 // import SignUp from "./components/SignUp";
 
 // const router = createBrowserRouter([
@@ -46,6 +47,7 @@ function App() {
           <Route path="/requests" element={<Requests/>}/>
           <Route path="/change-password" element={<ChangePassword/>}/>
           <Route path="/premium" element={<Premium/>}/>
+          <Route path="/chat/:targetUserId" element={<Chat/>}/>
           {/* <Route path="/terms-and-conditions" element={<terms/>}/> */}
         </Route> 
          {/* Unknown URL */}
