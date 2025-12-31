@@ -125,4 +125,6 @@
       - Ref:  https://razorpay.com/docs/webhooks/payloads/payments/
 
    # Real Time Chat using Websocket(Socket.io)
-      - 
+      - Build the UI for a chat window on /chat/:targetUserId
+      - Setup socket.io in backend
+      - npm i socket.io
