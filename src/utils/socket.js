@@ -1,9 +1,22 @@
 import io from "socket.io-client"
 import {BASE_URL} from "./constants"
 
+// export const createSocketConnection = () => {
+//   if(location.hostname === "localhost"){
+//     return io(BASE_URL)   
+//   }else {
+//     return io("/", {path: "/socket.io"})
+//   }
+// }
+
+let socket;
+
 export const createSocketConnection = () => {
-  return io(BASE_URL)   // url where you need to connect (backend url) .ie. basically you are telling the client connect to your backend system 
-}
+  if (!socket) {
+    socket = io(BASE_URL);  // url where you need to connect (backend url) .ie. basically you are telling the client connect to your backend system 
+  }
+  return socket;
+};
 
 // let socket;
 // export const createSocketConnection = () => {
@@ -13,5 +26,5 @@ export const createSocketConnection = () => {
 //     })
 //   }
 //   return socket
-//   // return io(BASE_URL)   // url where you need to connect (backend url) .ie. basically you are telling the client connect to your backend system 
+//   // return io(BASE_URL)  
 // }

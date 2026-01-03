@@ -128,3 +128,13 @@
       - Build the UI for a chat window on /chat/:targetUserId
       - Setup socket.io in backend
       - npm i socket.io
+      - Setup frontend socket.io-client
+      - Initialize the chat
+      - createSocketConnection
+      - Listen to events
+      - Homework: improve the UI
+      - Homework: fix security bug, can I send message to a person who is not ny friend? - auth in websockets
+      - Homework: fix bug, if I am not friend, then I should not be able to send message
+      - Homework: feat: show green symbol when online and last seen 2 hours ago and seen message future 
+      - Homework: Limit messages when fetching from DB and build pagination
+      - Project Idea: Tic tac toe game, chess game, type racer game

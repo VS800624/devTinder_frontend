@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { createSocketConnection } from "../utils/socket";
 import { useSelector } from "react-redux";
@@ -11,6 +11,7 @@ const Chat = () => {
   const [newMessage, setNewMessage] = useState("");
   const user = useSelector((store) => store.user);
   const userId = user?._id;
+  const bottomRef = useRef(null)
 
   const fetchChatMessages = async () => {
     const chat = await axios.get(BASE_URL + "/chat/" + targetUserId, {
@@ -30,6 +31,10 @@ const Chat = () => {
     setMessages(chatMessages);
   };
 
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({behavior: "smooth"})
+  },[messages])
+  
   useEffect(() => {
     fetchChatMessages();
   }, []);
@@ -73,7 +78,7 @@ const Chat = () => {
   };
 
   return (
-    <div className="w-full mt-10 mb-34 md:mb-26 md:w-3/4 mx-auto h-[84vh] flex flex-col bg-gray-900 text-white rounded-xl shadow-lg overflow-hidden">
+    <div className="w-full mt-10 mb-34 md:mb-26 md:w-3/4 mx-auto h-[72vh] md:h-[78vh]  flex flex-col bg-gray-900 text-white rounded-xl shadow-lg overflow-hidden">
       {/* Header */}
       <div className="flex items-center gap-3 px-5 py-4 border-b border-gray-700">
         <h1 className="font-semibold">Chat</h1>
@@ -109,6 +114,7 @@ const Chat = () => {
             </div>
           );
         })}
+          <div ref={bottomRef} />
       </div>
 
       {/* Input Box */}
