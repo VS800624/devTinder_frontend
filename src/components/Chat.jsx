@@ -12,26 +12,27 @@ const Chat = () => {
   const user = useSelector((store) => store.user);
   const userId = user?._id;
 
-  const fetchChatMessages = async() => {
+  const fetchChatMessages = async () => {
     const chat = await axios.get(BASE_URL + "/chat/" + targetUserId, {
-      withCredentials: true})
-    console.log(chat?.data?.data?.messages)
+      withCredentials: true,
+    });
+    console.log(chat?.data?.data?.messages);
 
     const chatMessages = chat?.data?.data?.messages.map((msg) => {
-      const{senderId, text, createdAt} = msg
+      const { senderId, text, createdAt } = msg;
       return {
         firstName: senderId?.firstName,
         lastName: senderId?.lastName,
         text,
-        time: createdAt
-      }
-    })
-    setMessages(chatMessages)
-  }
+        time: createdAt,
+      };
+    });
+    setMessages(chatMessages);
+  };
 
   useEffect(() => {
-    fetchChatMessages()
-  }, [])
+    fetchChatMessages();
+  }, []);
 
   useEffect(() => {
     if (!user) {
@@ -45,17 +46,19 @@ const Chat = () => {
       targetUserId,
     });
 
-    socket.on("messageReceived", ({firstName,lastName, time, text}) => {
-    console.log(firstName + " : " + text)
-    setMessages((messages) => [...messages, {firstName, lastName,time, text}])
-  })
+    socket.on("messageReceived", ({ firstName, lastName, time, text }) => {
+      console.log(firstName + " : " + text);
+      setMessages((messages) => [
+        ...messages,
+        { firstName, lastName, time, text },
+      ]);
+    });
 
     // as soon as page unload or my component unmount, I want to disconnect from my socket
     return () => {
       socket.disconnect();
     };
   }, [userId, targetUserId]);
-  
 
   const sendMessage = () => {
     const socket = createSocketConnection();
@@ -66,20 +69,13 @@ const Chat = () => {
       targetUserId,
       text: newMessage,
     });
-    setNewMessage("")
+    setNewMessage("");
   };
 
   return (
-    <div className="w-full mt-10 mb-34 md:mb-26 md:w-1/2 mx-auto h-[72vh] flex flex-col bg-gray-900 text-white rounded-xl shadow-lg overflow-hidden">
+    <div className="w-full mt-10 mb-34 md:mb-26 md:w-3/4 mx-auto h-[84vh] flex flex-col bg-gray-900 text-white rounded-xl shadow-lg overflow-hidden">
       {/* Header */}
       <div className="flex items-center gap-3 px-5 py-4 border-b border-gray-700">
-        {/* <div className="w-10 h-10 rounded-full bg-gray-600 flex items-center justify-center font-bold">
-          U
-        </div> */}
-        {/* <div>
-          <h2 className="font-semibold">User {targetUserId}</h2>
-          <p className="text-xs text-gray-400">Online</p>
-        </div> */}
         <h1 className="font-semibold">Chat</h1>
       </div>
 
@@ -87,12 +83,28 @@ const Chat = () => {
       <div className="flex-1 overflow-y-auto px-5 py-4 space-y-4 bg-gray-800">
         {messages.map((msg, index) => {
           return (
-            <div key={index} className="chat  chat-start">
+            <div
+              key={index}
+              className={`chat ${user.firstName === msg.firstName ? "chat-end" : "chat-start"}`}
+            >
               <div className="chat-header mb-1 ">
                 {`${msg.firstName}  ${msg.lastName}`}
-               {msg.time &&  <time className="text-xs opacity-50">{timeAgo(msg.time)}</time>}
+                {msg.time && (
+                  <time className="text-xs opacity-50">
+                    {timeAgo(msg.time)}
+                  </time>
+                )}
               </div>
-              <div className="chat-bubble  ">{msg.text}</div>
+              
+              <div
+                className={`chat-bubble max-w-[70%] whitespace-pre-wrap break-words break-all ${
+                  user.firstName === msg.firstName
+                    ? "bg-blue-700 text-white"
+                    : "bg-gray-900 text-white"
+                }`}
+              >
+                {msg.text}
+              </div>
               <div className="chat-footer opacity-50">Seen</div>
             </div>
           );
@@ -105,6 +117,11 @@ const Chat = () => {
           type="text"
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                sendMessage();
+              }
+            }}
           placeholder="Type a message..."
           className="flex-1 px-4 py-2 rounded-full bg-gray-800 text-sm outline-none focus:ring-2 focus:ring-blue-500"
         />
