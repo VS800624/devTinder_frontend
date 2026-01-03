@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { createSocketConnection } from "../utils/socket";
 import { useSelector } from "react-redux";
+import { BASE_URL, timeAgo } from "../utils/constants";
+import axios from "axios";
 
 const Chat = () => {
   const { targetUserId } = useParams();
@@ -9,6 +11,27 @@ const Chat = () => {
   const [newMessage, setNewMessage] = useState("");
   const user = useSelector((store) => store.user);
   const userId = user?._id;
+
+  const fetchChatMessages = async() => {
+    const chat = await axios.get(BASE_URL + "/chat/" + targetUserId, {
+      withCredentials: true})
+    console.log(chat?.data?.data?.messages)
+
+    const chatMessages = chat?.data?.data?.messages.map((msg) => {
+      const{senderId, text, createdAt} = msg
+      return {
+        firstName: senderId?.firstName,
+        lastName: senderId?.lastName,
+        text,
+        time: createdAt
+      }
+    })
+    setMessages(chatMessages)
+  }
+
+  useEffect(() => {
+    fetchChatMessages()
+  }, [])
 
   useEffect(() => {
     if (!user) {
@@ -22,9 +45,9 @@ const Chat = () => {
       targetUserId,
     });
 
-    socket.on("messageReceived", ({firstName, text}) => {
+    socket.on("messageReceived", ({firstName,lastName, time, text}) => {
     console.log(firstName + " : " + text)
-    setMessages((messages) => [...messages, {firstName, text}])
+    setMessages((messages) => [...messages, {firstName, lastName,time, text}])
   })
 
     // as soon as page unload or my component unmount, I want to disconnect from my socket
@@ -32,11 +55,13 @@ const Chat = () => {
       socket.disconnect();
     };
   }, [userId, targetUserId]);
+  
 
   const sendMessage = () => {
     const socket = createSocketConnection();
     socket.emit("sendMessage", {
       firstName: user.firstName,
+      lastName: user.lastName,
       userId,
       targetUserId,
       text: newMessage,
@@ -64,8 +89,8 @@ const Chat = () => {
           return (
             <div key={index} className="chat  chat-start">
               <div className="chat-header mb-1 ">
-                {msg.firstName}
-                <time className="text-xs opacity-50">2 hours ago</time>
+                {`${msg.firstName}  ${msg.lastName}`}
+               {msg.time &&  <time className="text-xs opacity-50">{timeAgo(msg.time)}</time>}
               </div>
               <div className="chat-bubble  ">{msg.text}</div>
               <div className="chat-footer opacity-50">Seen</div>
